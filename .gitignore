@@ -1,0 +1,24 @@
+# Este repositorio publica apenas a pasta docs/ (site do GitHub Pages).
+# A estrategia e ignorar tudo por padrao e liberar so o que deve subir,
+# assim nada novo escapa sem querer.
+
+/*
+
+!.gitignore
+!README.md
+!/docs/
+
+# Fica de fora, de proposito:
+#   raw/      geodatabase original da BDGD (~9 GB, dado publico da ANEEL)
+#   scripts/  codigo de processamento e saidas intermediarias (CSV, PNG, HTML)
+
+# Lixo do sistema operacional, mesmo dentro de docs/
+docs/**/Thumbs.db
+docs/**/desktop.ini
+docs/**/.DS_Store
+
+# Para versionar tambem o codigo (recomendado: sao ~150 KB de texto),
+# acrescente a linha abaixo e ignore so as saidas pesadas:
+#   !/scripts/
+#   scripts/results/
+#   scripts/__pycache__/

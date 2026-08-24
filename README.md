@@ -1,11 +1,35 @@
 # Energia elétrica na Bahia — mapas interativos da BDGD
 
-Site estático com dois mapas interativos sobre a rede de distribuição e o
-mercado de energia elétrica da Bahia, construídos a partir da **BDGD 2024 da
-ANEEL** (Base de Dados Geográfica da Distribuidora, entrega da Neoenergia
-Coelba, data-base 31/12/2024).
+**Observatório da Indústria — Federação das Indústrias do Estado da Bahia (FIEB)**
 
-**Site publicado:** https://SEU-USUARIO.github.io/SEU-REPOSITORIO/
+Site estático com dois mapas interativos sobre a rede de distribuição e o
+mercado de energia elétrica da Bahia, **com dados de 2024**. A ferramenta apoia
+o diagnóstico do sistema elétrico baiano por formuladores de política e pelo
+setor produtivo, com transparência metodológica total.
+
+## A fonte
+
+A **BDGD — Base de Dados Geográfica da Distribuidora** é o retrato
+georreferenciado do sistema elétrico de uma concessionária. Todas as
+distribuidoras do país são obrigadas a entregá-la anualmente à ANEEL, no formato
+do Módulo 10 do PRODIST, que estrutura o Sistema de Informação Geográfica
+Regulatório (SIG-R). É a base que a agência usa para fiscalizar a rede, apurar
+perdas e instruir revisões tarifárias, e é informação pública.
+
+Não é amostra nem agregado: é o cadastro completo, ativo por ativo e cliente por
+cliente — cada subestação, alimentador, transformador e trecho de rede com
+localização e características técnicas; cada unidade consumidora com classe,
+tensão, situação e consumo mês a mês.
+
+A distribuidora aqui é a **Neoenergia Coelba** (Companhia de Eletricidade do
+Estado da Bahia, código 47 na ANEEL), concessionária de 415 dos 417 municípios
+baianos — Jandaíra e Rio Real são atendidas pela Sulgipe.
+
+**Os dados são de 2024**: entrega com data-base **31/12/2024** (arquivo `V11`,
+gerado em 02/09/2025). Os ativos são a posição da rede em 31/12/2024 e a energia
+é a soma dos doze meses de 2024. Não há mistura de anos.
+
+**Site publicado:** https://observatoriofieb.github.io/Mapas_BDGD_Coelba/
 
 ## Conteúdo
 

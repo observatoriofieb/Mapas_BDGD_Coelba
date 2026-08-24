@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Energia elétrica na Bahia — mapas interativos da BDGD</title>
-<meta name="description" content="Dois mapas interativos sobre a rede de distribuição e o mercado de energia elétrica da Bahia, a partir da Base de Dados Geográfica da Distribuidora (BDGD 2024) da ANEEL.">
+<title>Energia elétrica na Bahia — mapas interativos da BDGD 2024</title>
+<meta name="description" content="Mapas interativos sobre a rede de distribuição e o mercado de energia elétrica da Bahia, com dados de 2024 da BDGD (Base de Dados Geográfica da Distribuidora) da Neoenergia Coelba, entregue à ANEEL. Observatório da Indústria — FIEB.">
 <meta property="og:title" content="Energia elétrica na Bahia — mapas interativos">
-<meta property="og:description" content="638 subestações e o consumo de 415 municípios, a partir da BDGD 2024 da ANEEL / Neoenergia Coelba.">
+<meta property="og:description" content="638 subestações e o consumo de 415 municípios, com dados de 2024 da BDGD da Neoenergia Coelba (ANEEL). Observatório da Indústria — FIEB.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <style>
   :root{
     --bg:#0f141b; --card:#161d27; --line:#28323f; --txt:#e9eef5; --dim:#98a6b8;
-    --azul:#0072B2; --laranja:#E69F00; --verde:#009E73; --amarelo:#F0E442;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -22,19 +21,36 @@
   .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
   a{color:#7fd1ff}
 
-  header{padding:64px 0 40px;border-bottom:1px solid var(--line);
+  /* ---------------- marca ---------------- */
+  .marcas{border-bottom:1px solid var(--line);background:#0c1117}
+  .marcas .wrap{display:flex;align-items:center;gap:20px;padding-top:16px;
+    padding-bottom:16px;flex-wrap:wrap}
+  .marcas img{display:block}
+  .marcas .obs{height:68px}
+  .marcas .fieb{height:28px;opacity:.95}
+  .marcas .risco{width:1px;height:36px;background:var(--line)}
+  .marcas .quem{margin-left:auto;text-align:right;font-size:11.5px;
+    color:var(--dim);line-height:1.45}
+
+  /* ---------------- cabecalho ---------------- */
+  header{padding:56px 0 40px;border-bottom:1px solid var(--line);
     background:radial-gradient(1200px 380px at 15% -80px,#12314d 0%,transparent 70%)}
-  h1{margin:0 0 12px;font-size:clamp(28px,5vw,44px);line-height:1.15;
+  h1{margin:0 0 14px;font-size:clamp(28px,5vw,44px);line-height:1.15;
     letter-spacing:-.6px;font-weight:700}
-  header p{margin:0;max-width:62ch;color:var(--dim);font-size:16.5px}
-  .fonte{margin-top:20px;display:inline-flex;gap:8px;align-items:center;
-    font-size:12.5px;color:var(--dim);border:1px solid var(--line);
-    border-radius:20px;padding:6px 14px;background:#12181f}
-  .fonte b{color:var(--txt);font-weight:600}
+  header p{margin:0 0 14px;max-width:64ch;color:var(--dim);font-size:16.5px}
+  header p.proposito{color:#c6d3e2;border-left:2px solid #2a7fc4;
+    padding-left:16px;max-width:62ch}
+  .fontes{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .selo{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;
+    color:var(--dim);border:1px solid var(--line);border-radius:20px;
+    padding:6px 14px;background:#12181f;text-decoration:none}
+  .selo b{color:var(--txt);font-weight:600}
+  a.selo:hover{border-color:#3d5771;color:var(--txt)}
 
   h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;
     color:var(--dim);font-weight:700;margin:48px 0 16px}
 
+  /* ---------------- cards ---------------- */
   .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:24px;display:flex;flex-direction:column;transition:.18s;
@@ -53,12 +69,18 @@
     padding:9px 18px}
   .card:hover .botao{background:#2179bd}
 
+  /* ---------------- textos ---------------- */
   .sobre{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:14px 32px;margin-bottom:8px}
   .sobre div{border-left:2px solid var(--line);padding-left:14px}
   .sobre h4{margin:0 0 4px;font-size:13.5px;font-weight:650}
   .sobre p{margin:0;font-size:13px;color:var(--dim)}
 
+  .explica{max-width:78ch}
+  .explica p{margin:0 0 14px;font-size:14.5px;color:#c3d0de}
+  .explica p.destaque{background:#141c26;border:1px solid var(--line);
+    border-left:3px solid #2a7fc4;border-radius:0 8px 8px 0;padding:14px 18px;
+    color:#d9e3ee}
   table.ficha{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px}
   table.ficha th,table.ficha td{text-align:left;padding:9px 10px;
     border-bottom:1px solid var(--line);vertical-align:top}
@@ -68,21 +90,44 @@
   footer{margin-top:56px;padding:26px 0 48px;border-top:1px solid var(--line);
     color:var(--dim);font-size:12.5px}
   footer p{margin:4px 0}
+  footer .rodape-marca{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  footer .rodape-marca .obs{height:38px;opacity:.8}
+  footer .rodape-marca .fieb{height:19px;opacity:.8}
   code{background:#1d2635;border:1px solid var(--line);border-radius:4px;
     padding:1px 5px;font-size:12px}
+  @media (max-width:560px){
+    .marcas .quem{margin-left:0;text-align:left;width:100%}
+  }
 </style>
 </head>
 <body>
+
+<div class="marcas">
+  <div class="wrap">
+    <img class="obs" src="assets/logo-observatorio.png"
+         alt="Observatório da Indústria">
+    <span class="risco"></span>
+    <img class="fieb" src="assets/logo-fieb.png"
+         alt="FIEB — Federação das Indústrias do Estado da Bahia">
+    <span class="quem">Observatório da Indústria<br>Federação das Indústrias
+      do Estado da Bahia</span>
+  </div>
+</div>
 
 <header>
   <div class="wrap">
     <h1>Energia elétrica na Bahia</h1>
     <p>Dois mapas interativos sobre a rede de distribuição e o mercado de energia
-    do estado, construídos a partir da Base de Dados Geográfica da Distribuidora
-    (BDGD) da ANEEL. Todo o processamento é reprodutível a partir dos dados
-    públicos originais.</p>
-    <span class="fonte">Fonte: <b>BDGD 2024 · Neoenergia Coelba</b>
-      · base 31/12/2024 · ANEEL / SIG-R</span>
+    do estado, com <b>dados de 2024</b>, construídos a partir da Base de Dados
+    Geográfica da Distribuidora (BDGD) que a Neoenergia Coelba entrega à ANEEL.</p>
+    <p class="proposito">A ferramenta apoia o diagnóstico do sistema elétrico
+    baiano por formuladores de política e pelo setor produtivo, com transparência
+    metodológica total: a origem de cada número, os critérios de cálculo e as
+    limitações da base estão declarados nesta página e nas legendas dos mapas.</p>
+    <div class="fontes">
+      <span class="selo">Fonte: <b>BDGD · Neoenergia Coelba</b>
+        · dados de 2024 (data-base 31/12/2024) · ANEEL</span>
+    </div>
   </div>
 </header>
 
@@ -99,16 +144,18 @@
         <polygon points="33,26 40,33 33,40 26,33" fill="#CC79A7" stroke="#0f141b" stroke-width="2"/>
       </svg>
       <h3>Subestações da Bahia</h3>
-      <p>As 638 subestações da base, classificadas por posse com cor <i>e</i> forma
-      distintas (paleta segura para daltonismo). Cada ponto traz tensão, potência,
-      energia distribuída, mercado atendido e a distribuição da carga por classe;
-      o clique abre a ficha técnica completa. Filtros por tipo, por município e
-      busca livre.</p>
+      <p>As 638 subestações da base, classificadas por posse — isto é, por quem
+      detém o ativo: a distribuidora, outra distribuidora, terceiros, um
+      consumidor ou uma central geradora — com cor <i>e</i> forma distintas
+      (paleta segura para daltonismo). Cada ponto reúne tensão, potência, energia
+      distribuída, mercado atendido e distribuição da carga por classe; clicar
+      nele abre a ficha técnica completa. Filtros por tipo, por município e busca
+      livre.</p>
       <div class="chips">
         <span class="chip"><b>638</b> subestações</span>
         <span class="chip"><b>6.302</b> MVA</span>
         <span class="chip"><b>1.486</b> alimentadores</span>
-        <span class="chip"><b>238</b> municípios</span>
+        <span class="chip"><b>238</b> dos 415 municípios</span>
       </div>
       <span class="botao">Abrir mapa &rarr;</span>
     </a>
@@ -122,10 +169,10 @@
       </svg>
       <h3>Consumo de energia por município</h3>
       <p>Mapa de calor dos 415 municípios atendidos, com seis indicadores
-      alternáveis: consumo médio por unidade consumidora, consumo total, consumo
-      industrial em GWh, participação da indústria, mercado livre e geração
-      distribuída em baixa tensão. Traz também a tabela completa, ordenável,
-      filtrável e exportável em CSV.</p>
+      alternáveis: consumo médio por unidade consumidora (UC), consumo total,
+      consumo industrial em GWh, participação da indústria, mercado livre e
+      geração distribuída em baixa tensão. Traz também a tabela completa,
+      ordenável, filtrável e exportável em CSV.</p>
       <div class="chips">
         <span class="chip"><b>415</b> municípios</span>
         <span class="chip"><b>22.102</b> GWh/ano</span>
@@ -137,17 +184,64 @@
 
   </div>
 
-  <h2 id="dados">Sobre os dados</h2>
+  <h2 id="dados">A fonte: a BDGD da Coelba</h2>
+
+  <div class="explica">
+    <p>A <b>BDGD — Base de Dados Geográfica da Distribuidora</b> é o retrato
+    georreferenciado do sistema elétrico de uma concessionária. Todas as
+    distribuidoras do país são obrigadas a entregá-la anualmente à ANEEL, no
+    formato definido pelo Módulo 10 do PRODIST, que estrutura o Sistema de
+    Informação Geográfica Regulatório (SIG-R). É com ela que a agência fiscaliza
+    a rede, apura perdas técnicas e comerciais e instrui as revisões tarifárias —
+    e, por ser informação pública, fica disponível no Portal de Dados Abertos da
+    ANEEL.</p>
+
+    <p>O que a base contém não é uma amostra nem um agregado: é o cadastro
+    completo, ativo por ativo e cliente por cliente. Cada subestação, alimentador,
+    transformador e trecho de rede aparece com localização geográfica e
+    características técnicas; cada unidade consumidora aparece com classe
+    tarifária, tensão de fornecimento, situação e o consumo mês a mês. Foi essa
+    granularidade que permitiu montar os dois mapas desta página.</p>
+
+    <p>A distribuidora aqui é a <b>Neoenergia Coelba</b> — Companhia de
+    Eletricidade do Estado da Bahia, código 47 no cadastro da ANEEL —,
+    concessionária de distribuição de praticamente todo o território baiano:
+    415 dos 417 municípios do estado. Jandaíra e Rio Real são atendidas pela
+    Sulgipe e, por isso, não aparecem nos mapas.</p>
+
+    <p class="destaque"><b>Os dados são de 2024.</b> Usamos a entrega com
+    data-base <b>31 de dezembro de 2024</b> (arquivo <code>V11</code>, gerado em
+    02/09/2025). Isso significa duas coisas: os ativos — as 638 subestações, os
+    1.486 alimentadores, os 375 mil transformadores — são a fotografia da rede
+    como ela estava em 31/12/2024; e a energia é a soma dos <b>doze meses de
+    2024</b>, de janeiro a dezembro. Não há mistura de anos em nenhum indicador.
+    Como a entrega é anual, esta é a base mais recente disponível até a próxima
+    remessa da distribuidora.</p>
+  </div>
+
+  <h2>Ficha técnica</h2>
   <table class="ficha">
     <tr><th>Fonte</th>
       <td>BDGD — Base de Dados Geográfica da Distribuidora, entrega da Neoenergia
       Coelba (distribuidora 47) à ANEEL, data-base 31/12/2024. Universo completo,
-      sem amostragem: 7,3 milhões de unidades consumidoras, 638 subestações,
+      sem amostragem: 7,33 milhões de unidades consumidoras, 638 subestações,
       1.486 alimentadores e 375 mil transformadores de distribuição.</td></tr>
+    <tr><th>Período de referência</th>
+      <td>Ano de 2024. A energia de cada unidade consumidora, alimentador ou
+      município é a soma dos doze meses do ano; os ativos são a posição em
+      31/12/2024.</td></tr>
+    <tr><th>Unidade consumidora (UC)</th>
+      <td>Cada ponto de entrega faturável — um imóvel, uma indústria, um
+      equipamento público. A base traz 7,33 milhões de UCs cadastradas, das quais
+      <b>6,28 milhões estão ativas</b> (situação <code>AT</code> no cadastro);
+      as demais 1,05 milhão são ligações já desativadas que permanecem
+      registradas. Os indicadores por UC usam sempre as ativas; os totais de
+      energia, o universo completo.</td></tr>
     <tr><th>Cobertura</th>
-      <td>A Coelba atende praticamente toda a Bahia. Jandaíra e Rio Real ficam de
-      fora por serem atendidas pela Sulgipe. Subestações exclusivamente de
-      transmissão, que não constam da base da distribuidora, também não aparecem.</td></tr>
+      <td>Dos 415 municípios atendidos, as subestações estão presentes em 238 —
+      os demais recebem energia por linhas que partem de subestações vizinhas.
+      Subestações exclusivamente de transmissão, que não constam da base da
+      distribuidora, não aparecem.</td></tr>
     <tr><th>Municípios</th>
       <td>Definidos por interseção espacial com a malha de subdistritos do
       IBGE (Censo 2022). Nas subestações de fronteira, fora da Bahia, usa-se o
@@ -155,8 +249,10 @@
       vêm marcados no próprio mapa.</td></tr>
     <tr><th>Energia</th>
       <td>Anualizada pela soma de <code>ENE_01..ENE_12</code>. Os totais incluem
-      unidades desligadas com energia registrada no ano. O município é o do ponto
-      de conexão, o que desloca grandes clientes para onde está o ramal.</td></tr>
+      unidades já desligadas que ainda registraram energia no ano, o que pode
+      inflar ligeiramente os totais em alguns municípios. O município é o do
+      ponto de conexão, o que desloca grandes clientes para onde está o
+      ramal.</td></tr>
     <tr><th>Correção de qualidade</th>
       <td>No mapa de consumo, 186 registros de baixa tensão incompatíveis com a
       classe de tensão (acima de 657 MWh/ano, o teto de um ramal BT) foram
@@ -187,9 +283,16 @@
 
 <footer>
   <div class="wrap">
+    <div class="rodape-marca">
+      <img class="obs" src="assets/logo-observatorio.png" alt="Observatório da Indústria">
+      <img class="fieb" src="assets/logo-fieb.png" alt="FIEB">
+    </div>
+    <p><b>Observatório da Indústria</b> · Federação das Indústrias do Estado da
+    Bahia (FIEB)</p>
     <p>Mapas gerados por scripts Python (GeoPandas + Folium + Leaflet) a partir da
     geodatabase original da BDGD. Páginas estáticas, sem servidor.</p>
-    <p>Dados públicos da ANEEL · atualizado em 24/08/2026</p>
+    <p>Dados públicos da ANEEL · BDGD Neoenergia Coelba, ano de 2024
+    (data-base 31/12/2024) · página gerada em 24/08/2026</p>
   </div>
 </footer>
 
